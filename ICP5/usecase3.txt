@@ -1,0 +1,38 @@
+Statistics:
+
+hive> analyze table employees compute statistics;
+
+WordCount:
+
+1.First, we have written a user defined function for wordcount and implemented on input table using command :
+
+sqoop import --connect jdbc:mysql://localhost/db1 --username root --password cloudera --query "SELECT All_lines, wordcount(All_lines) as "Words" from employees WHERE  \$CONDITIONS" --m 1  --target-dir /employees/wordcount.txt --hive-import --create-hive-table --hive-table default.employees -m 1;
+
+User Defined function:
+
+
+DELIMITER $$
+ CREATE FUNCTION wordcount(str TEXT)
+            RETURNS INT
+            DETERMINISTIC
+            SQL SECURITY INVOKER
+            NO SQL
+       BEGIN
+         DECLARE wordCnt, idx, maxIdx INT DEFAULT 0;
+         DECLARE currChar, prevChar BOOL DEFAULT 0;
+         SET maxIdx=char_length(str);
+         WHILE idx < maxIdx DO
+             SET currChar=SUBSTRING(str, idx, 1) RLIKE '[[:alnum:]]';
+             IF NOT prevChar AND currChar THEN
+                 SET wordCnt=wordCnt+1;
+             END IF;
+             SET prevChar=currChar;
+             SET idx=idx+1;
+         END WHILE;
+         RETURN wordCnt;
+       END
+     $$
+
+Identifier pattern:
+
+sqoop import --connect jdbc:mysql://localhost/db1 --username root --password cloudera --query "SELECT *  FROM employees WHERE All_lines  LIKE '%__c%' AND  \$CONDITIONS" --m 1  --target-dir /pattern/identifier.txt --hive-import --create-hive-table --hive-table default.pattern -m 1:
