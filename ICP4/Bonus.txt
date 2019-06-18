@@ -1,0 +1,21 @@
+create table petrol_part(distributer_id STRING,amt_IN STRING,amy_OUT STRING,vol_IN INT,vol_OUT INT,year INT) PARTITIONED BY(distributer_name STRING);
+set hive.exec.dynamic.partition.mode=nonstrict;
+
+INSERT OVERWRITE TABLE petrol_part PARTITION(distributer_name)
+SELECT distributer_id,distributer_name,amt_IN,amy_OUT,vol_IN,vol_OUT FROM petrol1;
+
+SELECT 
+distributer_id
+,distributer_name
+,amt_IN
+,amy_OUT
+,vol_IN
+,vol_OUT
+,year
+ FROM
+ petrol1 AS p1 
+LEFT JOIN
+petrol_part AS pp 
+on p1.distributer_name=pp.distributer_name
+ WHERE
+ p1.year = 1636;
