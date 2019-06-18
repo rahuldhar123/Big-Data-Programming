@@ -1,0 +1,14 @@
+SQL to HDFS:
+
+1.create database using command: create database db1;
+2.create table t1(emp_id int,emp_name varchar(50),emp_sal int);
+3.insert into t1 values(5,"rahul",5000),(10,"sai",50000),(15,"kruthika",5000);
+4.sqoop import --connect jdbc:mysql://localhost/db1 --username root --password cloudera  --table t1 --m 1;
+5.to retrive data use command: hadoop fs -cat t1/*
+
+HDFS to SQL:
+
+1.create table empnew(ID int,name varchar(50));
+2.sqoop export --connect jdbc:mysql://localhost/db1 --username root --password cloudera  --table empnew --export-dir importresult1/part-m-ooooo --m 1;
+3.select * from empnew;
+
