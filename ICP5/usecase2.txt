@@ -1,0 +1,9 @@
+Hive to mySQL:
+
+1.create table emp(emp_id int,emp_name string) row format delimited fields terminated by ',' stored as textfile;
+2.load data inpath 't1/' into table emp;
+3.sqoop export --connect jdbc:mysql://localhost/db1 --username root --password cloudera --table empnew --export-dir /user/hive/warehouse/emp -m 1;
+
+SQL to Hive:
+
+1.sqoop import --connect  jdbc:mysql://localhost/db1 --username root --password cloudera --table t3  --target-dir /hivei/importresult2.txt --hive-import --create-hive-table --hive-table default.t4 -m 1; 
