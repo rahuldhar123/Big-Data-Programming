@@ -1,0 +1,21 @@
+Query-1: DC_goodVSbad
+select 'Tiny Super Heroes',count(*) from super_heroes where height<0 and publisher= "Marvel Comics";
+Query-2: TinySuperHeroes
+select "bad super hero count", count(*),"good super hero count",(730 - count(*)) from super_heroes where alignment="bad" and publisher="DC Comics";
+Query-3: avg
+select "Average Height of superheroes", AVG(Height),"Average weight of superheroes",AVG(Weight) from super_heroes;
+Query-4: eyecolor
+select eyecolor,count(eyecolor) as color_count from super_heroes group by eyecolor order by color_count desc;
+Query-5: Heaviest superhero
+select name,gender,eyecolor,race,haircolor,height,publisher,skincolor,alignment,weight from super_heroes as s where s.weight in (select max(Weight)) from super_heroes);
+Query-6:skin color:
+select skincolor,count(skincolor) from super_heroes where skincolor="white" group by skincolor;
+Query-7:Trending:
+select race, count(race) as countp from super_heroes group by race order by countp desc;
+Query-8:TopPublisher:
+select publisher, count(publisher) as countp from super_heroes group by publisher order by countp desc;
+Query-9: No hair:
+select alignment,count(alignment) from super_heroes where haircolor="No Hair" group by alignment;
+Query-10:Male Female: 
+set hiveconf:TotalCount=730;
+select "Female Super Heroes",count(gender),"Male Super Heroes", ('${hiveconf:TotalCount}'-count(gender)) from super_heros where gender = "Female" and publisher="Marvel Comics";
