@@ -1,0 +1,22 @@
+CREATE KEYSPACE employee WITH replication = {'class':'SimpleStrategy','replication_factor':1};
+
+
+CREATE TABLE employee.employee (employee_id int, department text, lastname text, years_with_company int, salary int, jobtitle text, hiredate date, managerId int,PRIMARY KEY (employee_id));
+
+COPY employee.employee (employee_id, department, lastname, years_with_company,hiredate,jobtitle,salary,managerid) FROM 'C:\Users\rahul\Downloads\Data\Data\employee\employee_entries.csv' WITH DELIMITER='|' AND HEADER=True;
+
+INSERT INTO employee.employee (employee_id,department,lastname,years_with_company,hiredate,jobtitle,salary,managerid) VALUES(7,'Engineering', 'dhar', 3,'2017-05-24', 'tester', 24000, 5);
+
+select employee_id, lastname, jobtitle, hiredate from employee;
+
+select lastname,salary from employee where jobtitle='clerk' ALLOW FILTERING;
+
+select lastname,jobtitle,salary from employee where hiredate='1980-12-17' ALLOW FILTERING;
+
+select lastname,salary from employee;
+
+select * from department where dept_no >= 20 allow filtering;
+
+select lastname, salary, managerId from employee where salary=50000 allow filtering;
+
+select initcap(ename) “Employee Name”, initcap(job) “Job” from employee_4521;
