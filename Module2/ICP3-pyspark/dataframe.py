@@ -18,7 +18,7 @@ df = spark.read.csv("D:\Drivers\github\Big-Data-Programming\Module2\ICP3-pyspark
 df.createOrReplaceTempView("survey")
 
 ## 2.save to file:
-df.write.csv("D:\Drivers\github\Big-Data-Programming\Module2\ICP3-pyspark\\ou1.csv")
+df.write.csv("D:\Drivers\github\Big-Data-Programming\Module2\ICP3-pyspark\\out.csv")
 
 #3.Remove duplicates
 df.dropDuplicates()
@@ -36,10 +36,8 @@ print(df.groupBy('treatment'))
 ## part-2 1. Join operation
 joined_df = df1.join(df2, df1.Country == df2.Country)
 
-
 # Aggregate functions
 df.groupby('Country').agg({'Age': 'mean'}).show()
-
 df.createOrReplaceTempView("survey")
 sqlDF = spark.sql("SELECT max(`Age`) FROM survey")
 sqlDF.show()
@@ -47,8 +45,14 @@ sqlDF.show()
 sqlDF = spark.sql("SELECT avg(`Age`) FROM survey")
 sqlDF.show()
 
-sqlDF = spark.sql("")
+sqlDF = spark.sql("SELECT min(`Age`) FROM survey")
+sqlDF.show()
 
 ## part-2 2. 13th row
 df13=df.take(13)
 print(df13[-1])
+
+## bonus 1. Write aparseLinemethod to split the comma-delimited row and create a Data frame
+#dfd=pd.read_csv("D:\Drivers\github\Big-Data-Programming\Module2\ICP3-pyspark\\survey.csv",sep=',')
+#dfd.registerTempTable("survey")
+#df.registerTempTable("survey")
