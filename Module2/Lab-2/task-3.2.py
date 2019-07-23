@@ -3,7 +3,7 @@ from pyspark import SparkContext
 from pyspark.streaming import StreamingContext
 from collections import namedtuple
 
-os.environ["SPARK_HOME"] = "C:\spark\spark-2.4.2-bin-hadoop2.7"
+os.environ["SPARK_HOME"] = "C:\spark\spark-2.4.1-bin-hadoop2.7"
 os.environ["HADOOP_HOME"] = "C:\\winutils\\"
 
 

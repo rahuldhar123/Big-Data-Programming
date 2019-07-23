@@ -1,7 +1,7 @@
 import os
 from pyspark import SparkContext
 
-os.environ["SPARK_HOME"] = "C:\\spark\\spark-2.4.2-bin-hadoop2.7"
+os.environ["SPARK_HOME"] = "C:\\spark\\spark-2.4.1-bin-hadoop2.7"
 os.environ["HADOOP_HOME"] = "C:\\winutils\\"
 
 def map(Text):
