@@ -34,7 +34,7 @@ model = dt.fit(training)
 # Generate prediction from test dataset
 predictions = model.transform(test)
 
-# Evuluate the accuracy of the model
+# Evaluate the accuracy of the model
 evaluator = MulticlassClassificationEvaluator()
 accuracy = evaluator.evaluate(predictions)
 # Show model accuracy

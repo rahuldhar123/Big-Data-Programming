@@ -10,7 +10,7 @@ os.environ["SPARK_HOME"] = "C:\spark\spark-2.4.1-bin-hadoop2.7"
 os.environ["HADOOP_HOME"]="C:\winutils"
 import numpy as np
 # Create spark session
-spark = SparkSession.builder.appName("ICP 7").getOrCreate()
+spark = SparkSession.builder.appName("Lab 4").getOrCreate()
 spark.sparkContext.setLogLevel("ERROR")
 
 
